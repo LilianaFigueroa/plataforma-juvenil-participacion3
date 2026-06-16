@@ -114,6 +114,10 @@ app.post("/api/votos", function (req, res) {
   });
 });
 
+app.get("/votar", function (req, res) {
+  res.sendFile(path.join(__dirname, "votar.html"));
+});
+
 app.listen(PORT, function () {
   console.log("Servidor funcionando en http://localhost:" + PORT);
 });
