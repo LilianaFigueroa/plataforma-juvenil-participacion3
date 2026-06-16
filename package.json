@@ -6,9 +6,9 @@
   "version": "1.0.0",
   "description": "Este repositorio será utilizado para construir progresivamente un proyecto pedagógico sobre participación juvenil, transparencia, control ciudadano y tecnología.",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/LilianaFigueroa/plataforma-juvenil-participacion3/issues"
   },
-  "homepage": "https://github.com/LilianaFigueroa/plataforma-juvenil-participacion3#readme"
+  "homepage": "https://github.com/LilianaFigueroa/plataforma-juvenil-participacion3#readme",
+  "devDependencies": {}
 }

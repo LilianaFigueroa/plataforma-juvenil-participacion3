@@ -69,6 +69,29 @@
 
   <div id="detallePerfil" class="detalle-perfil"></div>
 </section>
+
+<section class="formulario-candidato">
+  <h2>Registrar perfil pedagógico</h2>
+
+  <p>
+    Registra un perfil ficticio para la práctica académica.
+    No uses nombres reales, cédulas, teléfonos, direcciones ni datos sensibles.
+  </p>
+
+  <input id="nombreCandidato" type="text" placeholder="Nombre ficticio del perfil">
+  <input id="rolCandidato" type="text" placeholder="Rol pedagógico">
+  <textarea id="propuestaCandidato" rows="3" placeholder="Propuesta breve y responsable"></textarea>
+
+  <button id="btnGuardarCandidato" type="button">Guardar perfil</button>
+
+  <p id="mensajeGuardado"></p>
+</section>
+
+<section class="lista-candidatos">
+  <h2>Perfiles guardados</h2>
+  <div id="contenedorCandidatosGuardados"></div>
+</section>
+
   </main>
 
   <footer>
@@ -77,4 +100,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
