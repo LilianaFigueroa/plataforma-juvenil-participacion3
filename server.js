@@ -10,6 +10,17 @@ app.use(express.static(__dirname));
 
 const rutaCandidatos = path.join(__dirname, "data", "candidatos.json");
 
+const rutaVotos = path.join(__dirname, "data", "votos.json");
+
+function leerVotos() {
+  const data = fs.readFileSync(rutaVotos, "utf8");
+  return JSON.parse(data);
+}
+
+function guardarVotos(votos) {
+  fs.writeFileSync(rutaVotos, JSON.stringify(votos, null, 2));
+}
+
 function leerCandidatos() {
   const data = fs.readFileSync(rutaCandidatos, "utf8");
   return JSON.parse(data);
@@ -60,6 +71,50 @@ app.post("/api/candidatos", function (req, res) {
   }
 });
 
+app.get("/api/votos", function (req, res) {
+  const votos = leerVotos();
+  res.json(votos);
+});
+
+app.post("/api/votos", function (req, res) {
+  const identificacion = req.body.identificacion;
+  const candidato = req.body.candidato;
+
+  if (!identificacion || !candidato) {
+    return res.status(400).json({
+      mensaje: "Faltan datos: identificación o candidato"
+    });
+  }
+
+  const votos = leerVotos();
+
+  const yaVoto = votos.find(function (voto) {
+    return voto.identificacion === identificacion;
+  });
+
+  if (yaVoto) {
+    return res.status(400).json({
+      mensaje: "Esta identificación ya registró un voto pedagógico"
+    });
+  }
+
+  const nuevoVoto = {
+    id: Date.now(),
+    identificacion: identificacion,
+    candidato: candidato,
+    fecha: new Date().toISOString()
+  };
+
+  votos.push(nuevoVoto);
+  guardarVotos(votos);
+
+  res.status(201).json({
+    mensaje: "Voto pedagógico guardado correctamente",
+    voto: nuevoVoto
+  });
+});
+
 app.listen(PORT, function () {
   console.log("Servidor funcionando en http://localhost:" + PORT);
 });
+
