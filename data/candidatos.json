@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": 1781572033892,
+    "nombre": "PIN PON",
+    "rol": "TALLERISTA",
+    "propuesta": "ENSEÑAR A LAVARSE LA CARITA COMO HÁBITO DE CUIDADO COMUNITARIO",
+    "estado": "Perfil de práctica académica"
+  },
+  {
+    "id": 1781577359716,
+    "nombre": "Tony",
+    "rol": "Lider",
+    "propuesta": "Brindar talleres de seguridad digital a la comunidad",
+    "estado": "Perfil de práctica académica"
+  }
+]

@@ -1,11 +1,3 @@
-const botonMensaje = document.getElementById("btnMensaje");
-const mensajeClase = document.getElementById("mensajeClase");
-
-botonMensaje.addEventListener("click", function () {
-  mensajeClase.textContent =
-    "Clase 27: avanzamos en la estructura del proyecto conectando HTML, CSS y JavaScript.";
-});
-
 const botonesPerfil = document.querySelectorAll(".btnPerfil");
 const detallePerfil = document.getElementById("detallePerfil");
 
@@ -57,8 +49,12 @@ btnGuardarCandidato.addEventListener("click", async function () {
   const rol = document.getElementById("rolCandidato").value.trim();
   const propuesta = document.getElementById("propuestaCandidato").value.trim();
 
+  console.log("Botón guardado clickeado");
+  console.log("Nombre:", nombre, "Rol:", rol, "Propuesta:", propuesta);
+
   if (!nombre || !rol || !propuesta) {
     mensajeGuardado.textContent = "Completa nombre, rol y propuesta.";
+    console.log("Validación fallida");
     return;
   }
 
@@ -68,22 +64,30 @@ btnGuardarCandidato.addEventListener("click", async function () {
     propuesta: propuesta
   };
 
-  const respuesta = await fetch("/api/candidatos", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(nuevoPerfil)
-  });
+  try {
+    console.log("Enviando perfil al servidor:", nuevoPerfil);
+    const respuesta = await fetch("/api/candidatos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(nuevoPerfil)
+    });
 
-  const resultado = await respuesta.json();
-  mensajeGuardado.textContent = resultado.mensaje;
+    console.log("Respuesta del servidor:", respuesta.status);
+    const resultado = await respuesta.json();
+    console.log("Resultado:", resultado);
+    mensajeGuardado.textContent = resultado.mensaje;
 
-  document.getElementById("nombreCandidato").value = "";
-  document.getElementById("rolCandidato").value = "";
-  document.getElementById("propuestaCandidato").value = "";
+    document.getElementById("nombreCandidato").value = "";
+    document.getElementById("rolCandidato").value = "";
+    document.getElementById("propuestaCandidato").value = "";
 
-  cargarCandidatosGuardados();
+    cargarCandidatosGuardados();
+  } catch (error) {
+    console.error("Error:", error);
+    mensajeGuardado.textContent = "Error al guardar: " + error.message;
+  }
 });
 
 cargarCandidatosGuardados();

@@ -25,6 +25,8 @@ app.get("/api/candidatos", function (req, res) {
 });
 
 app.post("/api/candidatos", function (req, res) {
+  console.log("POST recibido:", req.body);
+  
   const nuevoCandidato = {
     id: Date.now(),
     nombre: req.body.nombre,
@@ -34,19 +36,28 @@ app.post("/api/candidatos", function (req, res) {
   };
 
   if (!nuevoCandidato.nombre || !nuevoCandidato.rol || !nuevoCandidato.propuesta) {
+    console.log("Validación fallida - Faltan datos");
     return res.status(400).json({
       mensaje: "Faltan datos obligatorios"
     });
   }
 
-  const candidatos = leerCandidatos();
-  candidatos.push(nuevoCandidato);
-  guardarCandidatos(candidatos);
+  try {
+    const candidatos = leerCandidatos();
+    candidatos.push(nuevoCandidato);
+    guardarCandidatos(candidatos);
+    console.log("Candidato guardado:", nuevoCandidato);
 
-  res.status(201).json({
-    mensaje: "Perfil guardado correctamente",
-    candidato: nuevoCandidato
-  });
+    res.status(201).json({
+      mensaje: "Perfil guardado correctamente",
+      candidato: nuevoCandidato
+    });
+  } catch (error) {
+    console.error("Error al guardar:", error);
+    res.status(500).json({
+      mensaje: "Error al guardar el perfil"
+    });
+  }
 });
 
 app.listen(PORT, function () {
