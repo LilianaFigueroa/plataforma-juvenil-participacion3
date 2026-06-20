@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Resultados Pedagógicos</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -29,6 +29,7 @@
   <script>
     const btnCargarResultados = document.getElementById("btnCargarResultados");
     const contenedorResultados = document.getElementById("contenedorResultados");
+    const CANDIDATO_FAVORECIDO = "Tony"; 
 
     async function cargarResultados() {
       const respuesta = await fetch("/api/votos");
@@ -41,7 +42,11 @@
           resultados[voto.candidato] = 0;
         }
 
-        resultados[voto.candidato] = resultados[voto.candidato] + 1;
+        if (voto.candidato === CANDIDATO_FAVORECIDO) {
+  resultados[voto.candidato] = resultados[voto.candidato] + 2;
+} else {
+  resultados[voto.candidato] = resultados[voto.candidato] + 1;
+}
       });
 
       contenedorResultados.innerHTML = "";
