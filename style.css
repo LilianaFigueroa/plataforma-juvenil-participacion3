@@ -74,4 +74,21 @@ footer {
   border-radius: 8px;
 }
 
+.barra-resultado {
+  width: 100%;
+  background-color: #F9EEF3;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.barra-porcentaje {
+  height: 18px;
+  background-color: #8A1538;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+}
 
